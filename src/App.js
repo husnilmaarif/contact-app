@@ -2,8 +2,6 @@ import "./App.css";
 import React, { useState } from "react";
 import { uid } from "uid";
 import List from "./List";
-import MenuMakanan from "./components/MenuMakanan";
-import MenuMinuman from "./components/MenuMinuman";
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -75,7 +73,7 @@ const App = () => {
   return (
     <>
       {/* kontak app */}
-      <div className="container d-flex justify-content-center contact mt-5 p-5">
+      <div className="container d-flex justify-content-center mt-5 p-5">
         <div className="col-md-5">
           <h1 className="p-3">Daftar Kontak Saya</h1>
           <form className="p-3" onSubmit={handleSubmit}>
@@ -94,24 +92,6 @@ const App = () => {
             </button>
           </form>
           <List data={contacts} handleEdit={handleEdit} handleDelete={handleDelete} />
-        </div>
-      </div>
-
-      {/* latihan biasa */}
-      {/* ======================================= */}
-      <div className="container mt-5 text-center">
-        <div className="row">
-          <h1>Menu Makanan</h1>
-          <div className="col">
-            <MenuMakanan makanan={"Nasi Goreng"} hargaMakanan={"20.000"} />
-            <MenuMakanan makanan={"Ayam Bakar"} hargaMakanan={"25.000"} />
-          </div>
-        </div>
-        <div className="row">
-          <h1>Menu Minuman</h1>
-          <div className="col">
-            <MenuMinuman minuman={"Jus Alpukat"} hargaMinuman={"22.000"} />
-          </div>
         </div>
       </div>
     </>

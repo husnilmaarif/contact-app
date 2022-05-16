@@ -28,7 +28,10 @@ const App = () => {
     e.preventDefault();
     alert("sukses");
 
-    if (formData.name || formData.telp === "") {
+    if (formData.name === "") {
+      return false;
+    }
+    if (formData.telp === "") {
       return false;
     }
 

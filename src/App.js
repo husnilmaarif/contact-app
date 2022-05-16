@@ -62,6 +62,14 @@ const App = () => {
     setIsUpdate({ id: id, status: true });
   }
 
+  function handleDelete(id) {
+    let data = [...contacts];
+    let filteredData = data.filter((contact) => contact.id !== id);
+    if (window.confirm("Yakin mau menghapus data?")) {
+      setContacts(filteredData);
+    }
+  }
+
   return (
     <div className="container d-flex justify-content-center">
       <div className="col-md-5">
@@ -81,7 +89,7 @@ const App = () => {
             Simpan
           </button>
         </form>
-        <List data={contacts} handleEdit={handleEdit} />
+        <List data={contacts} handleEdit={handleEdit} handleDelete={handleDelete} />
       </div>
     </div>
   );

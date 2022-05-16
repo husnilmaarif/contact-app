@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import { uid } from "uid";
 import List from "./List";
 
 const App = () => {
@@ -19,13 +20,22 @@ const App = () => {
 
   function handleChange(e) {
     let data = { ...formData };
-    data[e.target.value] = e.target.value;
+    data[e.target.name] = e.target.value;
     setFormData(data);
   }
 
   function handleSubmit(e) {
-    e.prefentDefault();
+    e.preventDefault();
     alert("sukses");
+
+    if (formData.name || formData.telp === "") {
+      return false;
+    }
+
+    // menambahkan kontak
+    let data = [...contacts];
+    data.push({ id: uid(), name: formData.name, telp: formData.telp });
+    setContacts(data);
   }
 
   return (
@@ -33,15 +43,15 @@ const App = () => {
       <div className="col-md-5">
         <h1 className="p-3">Daftar Kontak Saya</h1>
         <form className="p-3" onSubmit={handleSubmit}>
-          <div className="form-control">
+          <div className="form-group">
             <label htmlFor="name">Nama:</label>
             <br />
-            <input type="text" placeholder="masukkan nama" name="name" className="w-100" value={formData.name} onChange={handleChange} />
+            <input type="text" placeholder="masukkan nama" name="name" className="form-control w-100" value={formData.name} onChange={handleChange} />
           </div>
-          <div className="form-control mt-3">
+          <div className="form-group mt-3">
             <label htmlFor="telp">Nomor telepon:</label>
             <br />
-            <input type="text" placeholder="masukkan nomor" name="telp" className="w-100" value={formData.telp} onChange={handleChange} />
+            <input type="text" placeholder="masukkan nomor" name="telp" className="form-control w-100" value={formData.telp} onChange={handleChange} />
           </div>
           <button type="submit" className="btn btn-primary w-100 mt-3">
             Simpan

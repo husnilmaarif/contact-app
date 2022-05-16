@@ -17,6 +17,7 @@ const App = () => {
     },
   ]);
   const [formData, setFormData] = useState({ name: "", telp: "" });
+  const [isUpdate, setIsUpdate] = useState({ id: null, status: false });
 
   function handleChange(e) {
     let data = { ...formData };
@@ -27,6 +28,7 @@ const App = () => {
   function handleSubmit(e) {
     e.preventDefault();
     alert("sukses");
+    let data = [...contacts];
 
     if (formData.name === "") {
       return false;
@@ -35,10 +37,29 @@ const App = () => {
       return false;
     }
 
-    // menambahkan kontak
-    let data = [...contacts];
-    data.push({ id: uid(), name: formData.name, telp: formData.telp });
+    if (isUpdate.status) {
+      data.forEach((contact) => {
+        if (contact.id === isUpdate.id) {
+          contact.name = formData.name;
+          contact.telp = formData.telp;
+        }
+      });
+    } else {
+      // menambahkan kontak
+      data.push({ id: uid(), name: formData.name, telp: formData.telp });
+    }
+
     setContacts(data);
+    // menghapus value input jika data berhasil ditambah atau diedit
+    setFormData({ name: "", telp: "" });
+    setIsUpdate({ id: null, status: false });
+  }
+
+  function handleEdit(id) {
+    let data = [...contacts];
+    let foundData = data.find((contact) => contact.id === id);
+    setFormData({ name: foundData.name, telp: foundData.telp });
+    setIsUpdate({ id: id, status: true });
   }
 
   return (
@@ -60,7 +81,7 @@ const App = () => {
             Simpan
           </button>
         </form>
-        <List data={contacts} />
+        <List data={contacts} handleEdit={handleEdit} />
       </div>
     </div>
   );

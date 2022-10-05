@@ -15,6 +15,11 @@ const App = () => {
       name: "Maarif",
       telp: "082134343544",
     },
+    {
+      id: 3,
+      name: "Firebase",
+      telp: "082234758232",
+    },
   ]);
   const [formData, setFormData] = useState({ name: "", telp: "" });
   const [isUpdate, setIsUpdate] = useState({ id: null, status: false });
@@ -80,18 +85,36 @@ const App = () => {
             <div className="form-group">
               <label htmlFor="name">Nama:</label>
               <br />
-              <input type="text" placeholder="masukkan nama" name="name" className="form-control w-100" value={formData.name} onChange={handleChange} />
+              <input
+                type="text"
+                placeholder="masukkan nama"
+                name="name"
+                className="form-control w-100"
+                value={formData.name}
+                onChange={handleChange}
+              />
             </div>
             <div className="form-group mt-3">
               <label htmlFor="telp">Nomor telepon:</label>
               <br />
-              <input type="text" placeholder="masukkan nomor" name="telp" className="form-control w-100" value={formData.telp} onChange={handleChange} />
+              <input
+                type="text"
+                placeholder="masukkan nomor"
+                name="telp"
+                className="form-control w-100"
+                value={formData.telp}
+                onChange={handleChange}
+              />
             </div>
             <button type="submit" className="btn btn-primary w-100 mt-3">
               Simpan
             </button>
           </form>
-          <List data={contacts} handleEdit={handleEdit} handleDelete={handleDelete} />
+          <List
+            data={contacts}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
         </div>
       </div>
     </>
